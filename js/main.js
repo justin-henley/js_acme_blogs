@@ -1,4 +1,4 @@
-/* TODO
+/* 
 1. createElemWithText
 a. Receives up to 3 parameters
 b. 1st parameter is the HTML element string name to be created (h1, p, button, etc)
@@ -10,11 +10,19 @@ g. Use document.createElement() to create the requested HTML element
 h. Set the other desired element attributes.
 i. Return the created element.
 */
-const createElemWithText = () => {
+const createElemWithText = (htmlElem = "p", textContent = "", className) => {
+    // Create the new element
+    const newElement = document.createElement(htmlElem);
 
+    // Set the other attributes
+    newElement.textContent = textContent;
+    if (className) newElement.className = className;
+
+    // Return the created element
+    return newElement;
 };
 
-/* TODO
+/* 
 2. createSelectOptions
 a. Test users JSON data available here: https://jsonplaceholder.typicode.com/users
 b. For testing (not in function) you may want to define users with the test data.
@@ -26,8 +34,28 @@ g. Assigns the user.id to the option.value
 h. Assigns the user.name to the option.textContent
 i. Return an array of options elements
  */
-const createSelectOptions = () => {
+const createSelectOptions = (data) => {
+    // Return early if no parameter received
+    if (!data) return undefined;
 
+    // Create array of options elements
+    const optionElements = [];
+
+    // Loop through user data
+    data.forEach(user => {
+        // Create a new option
+        const option = document.createElement("option");
+        
+        // Add user data to the option
+        option.value = user.id;
+        option.textContent = user.name;
+
+        // Push new option to array
+        optionElements.push(option);
+    });
+
+    // Return array of options elements
+    return optionElements;
 };
 
 /* TODO
@@ -42,11 +70,21 @@ desired.
 e. Toggles the class 'hide' on the section element
 f. Return the section element
 */
-const toggleCommentSection = () => {
+const toggleCommentSection = (postId) => {
+    // Return early if no postId given
+    if (!postId) return undefined;
 
+    // Select the section
+    const section = document.querySelector(`section[data-post-id='${postId}']`);
+
+    // Return null is postId not found
+    if (!section) return null;
+
+    // Toggle the class
+    section.toggleAttribute("hide");
 };
 
-/* TODO
+/* 
 4. toggleCommentButton
 a. Receives a postId as the parameter
 b. Selects the button with the data-post-id attribute equal to the postId received as a
@@ -58,11 +96,24 @@ Comments'
 e. Suggestion (not required) for above: try a ternary statement
 f. Return the button element
 */
-const toggleCommentButton = () => {
+const toggleCommentButton = (postId) => {
+    // Return early if no postId given
+    if (!postId) return undefined;
 
+    // Select the button
+    const button = document.querySelector(`button[data-post-id='${postId}']`);
+
+    // Return null if postId not found
+    if (!button) return null;
+
+    // Toggle the text content
+    button.textContent = (button.textContent === "Show Comments")
+                        ? "Hide Comments"
+                        : "Show Comments";
+    return button;
 };
 
-/* TODO
+/* 
 5. deleteChildElements
 a. Receives a parentElement as a parameter
 b. Define a child variable as parentElement.lastElementChild
@@ -71,8 +122,23 @@ d. Use parentElement.removeChild to remove the child in the loop
 e. Reassign child to parentElement.lastElementChild in the loop
 f. Return the parentElement
 */
-const deleteChildElements = () => {
+const deleteChildElements = (parentElement) => {
+    const isDOM = el => el instanceof Element;
 
+    // Return early if no element received. or if the parameter is not a valid element name
+    if (!parentElement || !isDOM(parentElement)) return undefined;
+
+    // Define the child
+    let child = parentElement.lastElementChild;
+    
+    // While a child still exists, remove it
+    while (child) {
+        parentElement.removeChild(child);
+        child = parentElement.lastElementChild;
+    }
+
+    // Return the parentElement once all children removed
+    return parentElement;
 };
 
 /*
