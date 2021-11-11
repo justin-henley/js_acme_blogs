@@ -10,6 +10,9 @@ g. Use document.createElement() to create the requested HTML element
 h. Set the other desired element attributes.
 i. Return the created element.
 */
+const createElemWithText = () => {
+
+};
 
 /* TODO
 2. createSelectOptions
@@ -23,6 +26,9 @@ g. Assigns the user.id to the option.value
 h. Assigns the user.name to the option.textContent
 i. Return an array of options elements
  */
+const createSelectOptions = () => {
+
+};
 
 /* TODO
 3. toggleCommentSection
@@ -36,6 +42,9 @@ desired.
 e. Toggles the class 'hide' on the section element
 f. Return the section element
 */
+const toggleCommentSection = () => {
+
+};
 
 /* TODO
 4. toggleCommentButton
@@ -49,6 +58,9 @@ Comments'
 e. Suggestion (not required) for above: try a ternary statement
 f. Return the button element
 */
+const toggleCommentButton = () => {
+
+};
 
 /* TODO
 5. deleteChildElements
@@ -59,6 +71,9 @@ d. Use parentElement.removeChild to remove the child in the loop
 e. Reassign child to parentElement.lastElementChild in the loop
 f. Return the parentElement
 */
+const deleteChildElements = () => {
+
+};
 
 /*
 NOTE: The above functions had no dependency on other functions. They were very
@@ -81,6 +96,9 @@ i. You may want to define an empty toggleComments function for now. Not all test
 will pass for addButtonListeners until toggleComments exists. I recommend
 waiting on the logic inside the toggleComments function until we get there.
 */
+const addButtonListeners = () => {
+
+};
 
 /* TODO
 7. removeButtonListeners
@@ -92,6 +110,9 @@ removeEventListener)
 e. Refer to the addButtonListeners function as this should be nearly identical
 f. Return the button elements which were selected
 */
+const removeButtonListeners = () => {
+
+};
 
 /* TODO
 8. createComments
@@ -109,6 +130,9 @@ j. Append the h3 and paragraphs to the article element (see cheatsheet)
 k. Append the article element to the fragment
 l. Return the fragment element
 */
+const createComments = () => {
+
+};
 
 /* TODO
 9. populateSelectMenu
@@ -121,6 +145,9 @@ f. Loops through the options elements and appends each option element to the
 select menu
 g. Return the selectMenu element
 */
+const populateSelectMenu = () => {
+
+};
 
 /* 
 NOTE: The next functions use Async / Await to request data from an API. We cover this in
@@ -138,6 +165,9 @@ d. Uses the fetch API to request all users
 e. Await the users data response
 f. Return the JSON data
 */
+const getUsers = () => {
+
+};
 
 /* TODO
 11. getUserPosts
@@ -150,6 +180,9 @@ e. Uses the fetch API to request all users
 f. Await the users data response
 g. Return the JSON data
 */
+const getUserPosts = () => {
+
+};
 
 /* TODO
 12. getUser
@@ -162,6 +195,9 @@ e. Uses the fetch API to request the user
 f. Await the user data response
 g. Return the JSON data
 */
+const getUser = () => {
+
+};
 
 /* TODO
 13. getPostComments
@@ -174,6 +210,9 @@ e. Uses the fetch API to request all users
 f. Await the users data response
 g. Return the JSON data
 */
+const getPostComments = () => {
+
+};
 
 /* TODO
 NOTE: The next functions will depend on the async API data functions we just created.
@@ -195,6 +234,9 @@ h. Creates a variable named fragment equal to createComments(comments)
 i. Append the fragment to the section
 j. Return the section element
 */
+const displayComments = () => {
+
+};
 
 /* TODO
 15. createPosts
@@ -222,6 +264,9 @@ r. Append the section element to the article element
 s. After the loop completes, append the article element to the fragment
 t. Return the fragment element
 */
+const createPosts = () => {
+
+};
 
 /* TODO
 16. displayPosts
@@ -237,6 +282,9 @@ iii. Optional suggestion: use a ternary for this conditional
 f. Appends the element to the main element
 g. Returns the element variable
 */
+const displayPosts = () => {
+
+};
 
 /* TODO
 NOTE: This is the last group of functions. I call them “procedural functions” because they exist
@@ -259,6 +307,9 @@ h. Return an array containing the section element returned from
 toggleCommentSection and the button element returned from
 toggleCommentButton: [section, button]
 */
+const toggleComments = () => {
+
+};
 
 /* TODO
 18. refreshPosts
@@ -277,6 +328,9 @@ k. Result of addButtonListeners is the buttons returned from this function
 l. Return an array of the results from the functions called: [removeButtons, main,
 fragment, addButtons]
 */
+const refreshPosts = () => {
+
+};
 
 /* TODO
 19. selectMenuChangeEventHandler
@@ -291,6 +345,9 @@ h. Result is the refreshPostsArray
 i. Return an array with the userId, posts and the array returned from refreshPosts:
 [userId, posts, refreshPostsArray]
 */
+const selectMenuChangeEventHandler = () => {
+
+};
 
 /* TODO
 20. initPage
@@ -304,6 +361,9 @@ g. Result is the select element returned from populateSelectMenu
 h. Return an array with users JSON data from getUsers and the select element
 result from populateSelectMenu: [users, select]
 */
+const initPage = () => {
+
+};
 
 /* TODO
 21. initApp
@@ -316,6 +376,9 @@ event fires for the #selectMenu
 f. NOTE: All of the above needs to be correct for you app to function correctly.
 However, I can only test if the initApp function exists. It does not return anything.
 */
+const initApp = () => {
+
+};
 
 /* TODO
 NOTE: There is one last step to get your app to function correctly. I cannot test for this, but you
