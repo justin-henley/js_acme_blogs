@@ -163,7 +163,24 @@ will pass for addButtonListeners until toggleComments exists. I recommend
 waiting on the logic inside the toggleComments function until we get there.
 */
 const addButtonListeners = () => {
+    // Select all buttons inside the main element
+    const buttons = document.querySelectorAll("main button");
 
+    // Return if no buttons
+    if (!buttons) return;
+
+    // Loop through the NodeList of buttons
+    buttons.forEach(button => {
+        // Get the postId
+        const postId = button.dataset.id;
+
+        // Add click event listener
+        button.addEventListener("click", event => {
+            toggleComments(event, postId)[1]; 
+        });
+    });
+
+    return buttons;
 };
 
 /* TODO
@@ -177,10 +194,24 @@ e. Refer to the addButtonListeners function as this should be nearly identical
 f. Return the button elements which were selected
 */
 const removeButtonListeners = () => {
+    // Select all buttons inside the main element
+    const buttons = document.querySelectorAll("main button");
 
+    // Return if no buttons
+    if (!buttons) return;
+
+    // Loop through the NodeList of buttons
+    buttons.forEach(button => {
+        // Get the postId
+        const postId = button.dataset.id;
+
+        
+    });
+
+    return buttons;
 };
 
-/* TODO
+/* 
 8. createComments
 a. Depends on the createElemWithText function we created
 b. Receives JSON comments data as a parameter
@@ -196,11 +227,33 @@ j. Append the h3 and paragraphs to the article element (see cheatsheet)
 k. Append the article element to the fragment
 l. Return the fragment element
 */
-const createComments = () => {
+const createComments = (commentData) => {
+    // Return undefined if no parameter given
+    if (!commentData) return undefined;
 
+    // Create a fragment element
+    const frag = document.createDocumentFragment();
+
+    // Loop through the comments
+    commentData.forEach(comment => {
+        // Create the article
+        const article = document.createElement("article");
+
+        // Create the article elements and append to the article
+        const h3 = createElemWithText("h3", comment.name);
+        const body = createElemWithText("p", comment.body);
+        const from = createElemWithText("p", `From: ${comment.email}`);
+        article.append(h3, body, from);
+        
+        // Append the article to the fragment
+        frag.append(article);
+    });
+
+    // Return the fragment element
+    return frag;
 };
 
-/* TODO
+/* 
 9. populateSelectMenu
 a. Depends on the createSelectOptions function we created
 b. Receives the users JSON data as a parameter
@@ -211,8 +264,23 @@ f. Loops through the options elements and appends each option element to the
 select menu
 g. Return the selectMenu element
 */
-const populateSelectMenu = () => {
+const populateSelectMenu = (userData) => {
+    // Return undefined if no parameter passed
+    if (!userData) return undefined;
 
+    // Select the #selectMenu element by id
+    const selectElement = document.querySelector("#selectMenu");
+
+    // Pass the JSON data to createSelectOptions()
+    const options = createSelectOptions(userData);
+
+    // Loops through the options elements and appends each option to the select menu
+    options.forEach(option => {
+        selectElement.append(option);
+    });
+
+    // Return the selectMenu element
+    return selectElement;
 };
 
 /* 
