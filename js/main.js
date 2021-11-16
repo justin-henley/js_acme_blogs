@@ -172,7 +172,7 @@ const addButtonListeners = () => {
   // Loop through the NodeList of buttons
   buttons.forEach((button) => {
     // Get the postId
-    const postId = button.dataset.id;
+    const postId = button.dataset.postId;
 
     // Add click event listener
     button.addEventListener("click", (event) => {
