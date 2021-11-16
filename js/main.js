@@ -1,3 +1,11 @@
+// TODO add header
+
+// TODO add comments
+
+// TODO cleanup
+
+// TODO discussion for project
+
 /* 
 1. createElemWithText
 a. Receives up to 3 parameters
@@ -147,7 +155,7 @@ self-contained which is ideal. That is not always possible though. We will try t
 dependencies as we go. The next several functions have small dependencies.
 */
 
-/* TODO
+/* 
 6. addButtonListeners
 a. Selects all buttons nested inside the main element
 b. If buttons exist:
@@ -522,7 +530,7 @@ const displayPosts = async (posts) => {
   return element;
 };
 
-/* TODO
+/* 
 NOTE: This is the last group of functions. I call them “procedural functions” because they exist
 to pull the other functions together in an order that allows the web app to function as it should.
 This means their sole purpose is to call dependencies with the correct data in the proper order.
@@ -603,7 +611,7 @@ const selectMenuChangeEventHandler = async (event) => {
   return [userId, postsJSON, refreshPostsArray];
 };
 
-/* TODO
+/* 
 20. initPage
 a. Dependencies: getUsers, populateSelectMenu
 b. Should be an async function
@@ -622,7 +630,7 @@ const initPage = async () => {
   return [usersJSON, select];
 };
 
-/* TODO
+/* 
 21. initApp
 a. Dependencies: initPage, selectMenuChangeEventHandler
 b. Call the initPage() function.
@@ -643,7 +651,7 @@ const initApp = () => {
   );
 };
 
-/* TODO
+/* 
 NOTE: There is one last step to get your app to function correctly. I cannot test for this, but you
 must apply it to call the script into action.
 *** This must be underneath the definition of initApp in your file.
