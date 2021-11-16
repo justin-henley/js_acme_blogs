@@ -322,18 +322,18 @@ g. Return the JSON data
 const getUserPosts = async (userID) => {
   if (!userID) return undefined;
   try {
-    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts?userId=${userID}`
+    );
 
     if (!res.ok) throw new Error("Status code not in 200-299 range");
-
-    let posts = await res.json();
-    return posts.filter((post) => post.userId == userID);
+    return await res.json();
   } catch (error) {
     console.log(error);
   }
 };
 
-/* TODO
+/* 
 12. getUser
 a. Receives a user id as a parameter
 b. Fetches data for a specific user id from: https://jsonplaceholder.typicode.com/
@@ -347,14 +347,22 @@ g. Return the JSON data
 const getUser = async (userID) => {
   if (!userID) return undefined;
   try {
-    const res = await fetch("");
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/users?id=${userID}`
+    );
+
     if (!res.ok) throw new Error("Status code not in 200-299 range");
+
+    // Make sure the user exists before accessing array
+    let found = await res.json();
+    if (found.length === 0) throw new Error("User not found");
+    return found[0];
   } catch (error) {
     console.log(error);
   }
 };
 
-/* TODO
+/* 
 13. getPostComments
 a. Receives a post id as a parameter
 b. Fetches comments for a specific post id from:
@@ -365,7 +373,20 @@ e. Uses the fetch API to request all users
 f. Await the users data response
 g. Return the JSON data
 */
-const getPostComments = () => {};
+const getPostComments = async (postID) => {
+  if (!postID) return undefined;
+  try {
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/comments?postId=${postID}`
+    );
+
+    if (!res.ok) throw new Error("Status code not in 200-299 range");
+
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 /* TODO
 NOTE: The next functions will depend on the async API data functions we just created.
@@ -387,7 +408,7 @@ h. Creates a variable named fragment equal to createComments(comments)
 i. Append the fragment to the section
 j. Return the section element
 */
-const displayComments = () => {};
+const displayComments = async (postID) => {};
 
 /* TODO
 15. createPosts
