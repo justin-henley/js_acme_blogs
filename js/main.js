@@ -11,15 +11,15 @@ h. Set the other desired element attributes.
 i. Return the created element.
 */
 const createElemWithText = (htmlElem = "p", textContent = "", className) => {
-    // Create the new element
-    const newElement = document.createElement(htmlElem);
+  // Create the new element
+  const newElement = document.createElement(htmlElem);
 
-    // Set the other attributes
-    newElement.textContent = textContent;
-    if (className) newElement.className = className;
+  // Set the other attributes
+  newElement.textContent = textContent;
+  if (className) newElement.className = className;
 
-    // Return the created element
-    return newElement;
+  // Return the created element
+  return newElement;
 };
 
 /* 
@@ -35,27 +35,27 @@ h. Assigns the user.name to the option.textContent
 i. Return an array of options elements
  */
 const createSelectOptions = (data) => {
-    // Return early if no parameter received
-    if (!data) return undefined;
+  // Return early if no parameter received
+  if (!data) return undefined;
 
-    // Create array of options elements
-    const optionElements = [];
+  // Create array of options elements
+  const optionElements = [];
 
-    // Loop through user data
-    data.forEach(user => {
-        // Create a new option
-        const option = document.createElement("option");
-        
-        // Add user data to the option
-        option.value = user.id;
-        option.textContent = user.name;
+  // Loop through user data
+  data.forEach((user) => {
+    // Create a new option
+    const option = document.createElement("option");
 
-        // Push new option to array
-        optionElements.push(option);
-    });
+    // Add user data to the option
+    option.value = user.id;
+    option.textContent = user.name;
 
-    // Return array of options elements
-    return optionElements;
+    // Push new option to array
+    optionElements.push(option);
+  });
+
+  // Return array of options elements
+  return optionElements;
 };
 
 /* TODO
@@ -71,17 +71,17 @@ e. Toggles the class 'hide' on the section element
 f. Return the section element
 */
 const toggleCommentSection = (postId) => {
-    // Return early if no postId given
-    if (!postId) return undefined;
+  // Return early if no postId given
+  if (!postId) return undefined;
 
-    // Select the section
-    const section = document.querySelector(`section[data-post-id='${postId}']`);
+  // Select the section
+  const section = document.querySelector(`section[data-post-id='${postId}']`);
 
-    // Return null is postId not found
-    if (!section) return null;
+  // Return null is postId not found
+  if (!section) return null;
 
-    // Toggle the class
-    section.toggleAttribute("hide");
+  // Toggle the class
+  section.toggleAttribute("hide");
 };
 
 /* 
@@ -97,20 +97,19 @@ e. Suggestion (not required) for above: try a ternary statement
 f. Return the button element
 */
 const toggleCommentButton = (postId) => {
-    // Return early if no postId given
-    if (!postId) return undefined;
+  // Return early if no postId given
+  if (!postId) return undefined;
 
-    // Select the button
-    const button = document.querySelector(`button[data-post-id='${postId}']`);
+  // Select the button
+  const button = document.querySelector(`button[data-post-id='${postId}']`);
 
-    // Return null if postId not found
-    if (!button) return null;
+  // Return null if postId not found
+  if (!button) return null;
 
-    // Toggle the text content
-    button.textContent = (button.textContent === "Show Comments")
-                        ? "Hide Comments"
-                        : "Show Comments";
-    return button;
+  // Toggle the text content
+  button.textContent =
+    button.textContent === "Show Comments" ? "Hide Comments" : "Show Comments";
+  return button;
 };
 
 /* 
@@ -123,22 +122,22 @@ e. Reassign child to parentElement.lastElementChild in the loop
 f. Return the parentElement
 */
 const deleteChildElements = (parentElement) => {
-    const isDOM = el => el instanceof Element;
+  const isDOM = (el) => el instanceof Element;
 
-    // Return early if no element received. or if the parameter is not a valid element name
-    if (!parentElement || !isDOM(parentElement)) return undefined;
+  // Return early if no element received. or if the parameter is not a valid element name
+  if (!parentElement || !isDOM(parentElement)) return undefined;
 
-    // Define the child
-    let child = parentElement.lastElementChild;
-    
-    // While a child still exists, remove it
-    while (child) {
-        parentElement.removeChild(child);
-        child = parentElement.lastElementChild;
-    }
+  // Define the child
+  let child = parentElement.lastElementChild;
 
-    // Return the parentElement once all children removed
-    return parentElement;
+  // While a child still exists, remove it
+  while (child) {
+    parentElement.removeChild(child);
+    child = parentElement.lastElementChild;
+  }
+
+  // Return the parentElement once all children removed
+  return parentElement;
 };
 
 /*
@@ -163,24 +162,24 @@ will pass for addButtonListeners until toggleComments exists. I recommend
 waiting on the logic inside the toggleComments function until we get there.
 */
 const addButtonListeners = () => {
-    // Select all buttons inside the main element
-    const buttons = document.querySelectorAll("main button");
+  // Select all buttons inside the main element
+  const buttons = document.querySelectorAll("main button");
 
-    // Return if no buttons
-    if (!buttons) return;
+  // Return if no buttons
+  if (!buttons) return;
 
-    // Loop through the NodeList of buttons
-    buttons.forEach(button => {
-        // Get the postId
-        const postId = button.dataset.id;
+  // Loop through the NodeList of buttons
+  buttons.forEach((button) => {
+    // Get the postId
+    const postId = button.dataset.id;
 
-        // Add click event listener
-        button.addEventListener("click", event => {
-            toggleComments(event, postId)[1]; 
-        });
+    // Add click event listener
+    button.addEventListener("click", (event) => {
+      toggleComments(event, postId)[1];
     });
+  });
 
-    return buttons;
+  return buttons;
 };
 
 /* TODO
@@ -194,21 +193,19 @@ e. Refer to the addButtonListeners function as this should be nearly identical
 f. Return the button elements which were selected
 */
 const removeButtonListeners = () => {
-    // Select all buttons inside the main element
-    const buttons = document.querySelectorAll("main button");
+  // Select all buttons inside the main element
+  const buttons = document.querySelectorAll("main button");
 
-    // Return if no buttons
-    if (!buttons) return;
+  // Return if no buttons
+  if (!buttons) return;
 
-    // Loop through the NodeList of buttons
-    buttons.forEach(button => {
-        // Get the postId
-        const postId = button.dataset.id;
+  // Loop through the NodeList of buttons
+  buttons.forEach((button) => {
+    // Get the postId
+    const postId = button.dataset.id;
+  });
 
-        
-    });
-
-    return buttons;
+  return buttons;
 };
 
 /* 
@@ -228,29 +225,29 @@ k. Append the article element to the fragment
 l. Return the fragment element
 */
 const createComments = (commentData) => {
-    // Return undefined if no parameter given
-    if (!commentData) return undefined;
+  // Return undefined if no parameter given
+  if (!commentData) return undefined;
 
-    // Create a fragment element
-    const frag = document.createDocumentFragment();
+  // Create a fragment element
+  const frag = document.createDocumentFragment();
 
-    // Loop through the comments
-    commentData.forEach(comment => {
-        // Create the article
-        const article = document.createElement("article");
+  // Loop through the comments
+  commentData.forEach((comment) => {
+    // Create the article
+    const article = document.createElement("article");
 
-        // Create the article elements and append to the article
-        const h3 = createElemWithText("h3", comment.name);
-        const body = createElemWithText("p", comment.body);
-        const from = createElemWithText("p", `From: ${comment.email}`);
-        article.append(h3, body, from);
-        
-        // Append the article to the fragment
-        frag.append(article);
-    });
+    // Create the article elements and append to the article
+    const h3 = createElemWithText("h3", comment.name);
+    const body = createElemWithText("p", comment.body);
+    const from = createElemWithText("p", `From: ${comment.email}`);
+    article.append(h3, body, from);
 
-    // Return the fragment element
-    return frag;
+    // Append the article to the fragment
+    frag.append(article);
+  });
+
+  // Return the fragment element
+  return frag;
 };
 
 /* 
@@ -265,22 +262,22 @@ select menu
 g. Return the selectMenu element
 */
 const populateSelectMenu = (userData) => {
-    // Return undefined if no parameter passed
-    if (!userData) return undefined;
+  // Return undefined if no parameter passed
+  if (!userData) return undefined;
 
-    // Select the #selectMenu element by id
-    const selectElement = document.querySelector("#selectMenu");
+  // Select the #selectMenu element by id
+  const selectElement = document.querySelector("#selectMenu");
 
-    // Pass the JSON data to createSelectOptions()
-    const options = createSelectOptions(userData);
+  // Pass the JSON data to createSelectOptions()
+  const options = createSelectOptions(userData);
 
-    // Loops through the options elements and appends each option to the select menu
-    options.forEach(option => {
-        selectElement.append(option);
-    });
+  // Loops through the options elements and appends each option to the select menu
+  options.forEach((option) => {
+    selectElement.append(option);
+  });
 
-    // Return the selectMenu element
-    return selectElement;
+  // Return the selectMenu element
+  return selectElement;
 };
 
 /* 
@@ -289,7 +286,7 @@ Week 13. I do not recommend proceeding beyond this point until you have complete
 learning module for Week 13.
 */
 
-/* TODO
+/* 
 10. getUsers
 a. Fetches users data from: https://jsonplaceholder.typicode.com/ (look at
 Resources section)
@@ -299,11 +296,19 @@ d. Uses the fetch API to request all users
 e. Await the users data response
 f. Return the JSON data
 */
-const getUsers = () => {
+const getUsers = async () => {
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/users");
 
+    if (!res.ok) throw new Error("Status code not in 200-299 range");
+
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-/* TODO
+/* 
 11. getUserPosts
 a. Receives a user id as a parameter
 b. Fetches post data for a specific user id from:
@@ -314,8 +319,18 @@ e. Uses the fetch API to request all users
 f. Await the users data response
 g. Return the JSON data
 */
-const getUserPosts = () => {
+const getUserPosts = async (userID) => {
+  if (!userID) return undefined;
+  try {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
 
+    if (!res.ok) throw new Error("Status code not in 200-299 range");
+
+    let posts = await res.json();
+    return posts.filter((post) => post.userId == userID);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /* TODO
@@ -329,8 +344,14 @@ e. Uses the fetch API to request the user
 f. Await the user data response
 g. Return the JSON data
 */
-const getUser = () => {
-
+const getUser = async (userID) => {
+  if (!userID) return undefined;
+  try {
+    const res = await fetch("");
+    if (!res.ok) throw new Error("Status code not in 200-299 range");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /* TODO
@@ -344,9 +365,7 @@ e. Uses the fetch API to request all users
 f. Await the users data response
 g. Return the JSON data
 */
-const getPostComments = () => {
-
-};
+const getPostComments = () => {};
 
 /* TODO
 NOTE: The next functions will depend on the async API data functions we just created.
@@ -368,9 +387,7 @@ h. Creates a variable named fragment equal to createComments(comments)
 i. Append the fragment to the section
 j. Return the section element
 */
-const displayComments = () => {
-
-};
+const displayComments = () => {};
 
 /* TODO
 15. createPosts
@@ -398,9 +415,7 @@ r. Append the section element to the article element
 s. After the loop completes, append the article element to the fragment
 t. Return the fragment element
 */
-const createPosts = () => {
-
-};
+const createPosts = () => {};
 
 /* TODO
 16. displayPosts
@@ -416,9 +431,7 @@ iii. Optional suggestion: use a ternary for this conditional
 f. Appends the element to the main element
 g. Returns the element variable
 */
-const displayPosts = () => {
-
-};
+const displayPosts = () => {};
 
 /* TODO
 NOTE: This is the last group of functions. I call them “procedural functions” because they exist
@@ -441,9 +454,7 @@ h. Return an array containing the section element returned from
 toggleCommentSection and the button element returned from
 toggleCommentButton: [section, button]
 */
-const toggleComments = () => {
-
-};
+const toggleComments = () => {};
 
 /* TODO
 18. refreshPosts
@@ -462,9 +473,7 @@ k. Result of addButtonListeners is the buttons returned from this function
 l. Return an array of the results from the functions called: [removeButtons, main,
 fragment, addButtons]
 */
-const refreshPosts = () => {
-
-};
+const refreshPosts = () => {};
 
 /* TODO
 19. selectMenuChangeEventHandler
@@ -479,9 +488,7 @@ h. Result is the refreshPostsArray
 i. Return an array with the userId, posts and the array returned from refreshPosts:
 [userId, posts, refreshPostsArray]
 */
-const selectMenuChangeEventHandler = () => {
-
-};
+const selectMenuChangeEventHandler = () => {};
 
 /* TODO
 20. initPage
@@ -495,9 +502,7 @@ g. Result is the select element returned from populateSelectMenu
 h. Return an array with users JSON data from getUsers and the select element
 result from populateSelectMenu: [users, select]
 */
-const initPage = () => {
-
-};
+const initPage = () => {};
 
 /* TODO
 21. initApp
@@ -510,9 +515,7 @@ event fires for the #selectMenu
 f. NOTE: All of the above needs to be correct for you app to function correctly.
 However, I can only test if the initApp function exists. It does not return anything.
 */
-const initApp = () => {
-
-};
+const initApp = () => {};
 
 /* TODO
 NOTE: There is one last step to get your app to function correctly. I cannot test for this, but you
