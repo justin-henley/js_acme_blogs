@@ -553,7 +553,7 @@ const toggleComments = (event, postId) => {
   return [section, button];
 };
 
-/* TODO
+/* 
 18. refreshPosts
 a. Dependencies: removeButtonListeners, deleteChildElements, displayPosts,
 addButtonListeners
@@ -571,8 +571,11 @@ l. Return an array of the results from the functions called: [removeButtons, mai
 fragment, addButtons]
 */
 const refreshPosts = async (postsJSON) => {
+  if (!postsJSON) return undefined;
+
   const removeButtons = removeButtonListeners();
-  const main = deleteChildElements("main");
+  let main = document.querySelector("main");
+  main = deleteChildElements(main);
   const fragment = await displayPosts(postsJSON);
   const addButtons = addButtonListeners();
 
