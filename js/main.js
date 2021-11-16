@@ -489,7 +489,7 @@ const createPosts = async (postsJSON) => {
   return fragment;
 };
 
-/* TODO
+/* 
 16. displayPosts
 a. Dependencies: createPosts, createElemWithText
 b. Is an async function
@@ -503,7 +503,23 @@ iii. Optional suggestion: use a ternary for this conditional
 f. Appends the element to the main element
 g. Returns the element variable
 */
-const displayPosts = () => {};
+const displayPosts = async (posts) => {
+  const main = document.querySelector("main");
+
+  let element;
+  if (posts) {
+    element = await createPosts(posts);
+  } else {
+    element = createElemWithText(
+      "p",
+      "Select an Employee to display their posts."
+    );
+    element.classList.add("default-text");
+  }
+
+  main.append(element);
+  return element;
+};
 
 /* TODO
 NOTE: This is the last group of functions. I call them “procedural functions” because they exist
