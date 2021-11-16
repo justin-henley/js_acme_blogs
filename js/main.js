@@ -582,7 +582,7 @@ const refreshPosts = async (postsJSON) => {
   return [removeButtons, main, fragment, addButtons];
 };
 
-/* TODO
+/* 
 19. selectMenuChangeEventHandler
 a. Dependencies: getUserPosts, refreshPosts
 b. Should be an async function
@@ -595,7 +595,13 @@ h. Result is the refreshPostsArray
 i. Return an array with the userId, posts and the array returned from refreshPosts:
 [userId, posts, refreshPostsArray]
 */
-const selectMenuChangeEventHandler = () => {};
+const selectMenuChangeEventHandler = async (event) => {
+  const userId = event?.target?.value || 1;
+  const postsJSON = await getUserPosts(userId);
+  const refreshPostsArray = await refreshPosts(postsJSON);
+
+  return [userId, postsJSON, refreshPostsArray];
+};
 
 /* TODO
 20. initPage
@@ -609,7 +615,12 @@ g. Result is the select element returned from populateSelectMenu
 h. Return an array with users JSON data from getUsers and the select element
 result from populateSelectMenu: [users, select]
 */
-const initPage = () => {};
+const initPage = async () => {
+  const usersJSON = await getUsers();
+  const select = populateSelectMenu(usersJSON);
+
+  return [usersJSON, select];
+};
 
 /* TODO
 21. initApp
@@ -622,7 +633,11 @@ event fires for the #selectMenu
 f. NOTE: All of the above needs to be correct for you app to function correctly.
 However, I can only test if the initApp function exists. It does not return anything.
 */
-const initApp = () => {};
+const initApp = () => {
+  initPage();
+  const select = document.getElementById("selectMenu");
+  select.addEventListener("change", selectMenuChangeEventHandler());
+};
 
 /* TODO
 NOTE: There is one last step to get your app to function correctly. I cannot test for this, but you
@@ -633,3 +648,4 @@ must apply it to call the script into action.
 3. Put initApp in the listener as the event handler function.
 4. This will call initApp after the DOM content has loaded and your app will be started.
 */
+document.addEventListener("DOMContentLoaded", initApp());
