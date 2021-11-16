@@ -176,14 +176,14 @@ const addButtonListeners = () => {
 
     // Add click event listener
     button.addEventListener("click", (event) => {
-      toggleComments(event, postId)[1];
+      toggleComments(event, postId);
     });
   });
 
   return buttons;
 };
 
-/* TODO
+/* 
 7. removeButtonListeners
 a. Selects all buttons nested inside the main element
 b. Loops through the NodeList of buttons
@@ -528,7 +528,7 @@ to pull the other functions together in an order that allows the web app to func
 This means their sole purpose is to call dependencies with the correct data in the proper order.
 */
 
-/* TODO
+/* 
 17. toggleComments
 a. Dependencies: toggleCommentSection, toggleCommentButton
 b. Receives 2 parameters: (see addButtonListeners function description)
@@ -570,7 +570,14 @@ k. Result of addButtonListeners is the buttons returned from this function
 l. Return an array of the results from the functions called: [removeButtons, main,
 fragment, addButtons]
 */
-const refreshPosts = () => {};
+const refreshPosts = async (postsJSON) => {
+  const removeButtons = removeButtonListeners();
+  const main = deleteChildElements("main");
+  const fragment = await displayPosts(postsJSON);
+  const addButtons = addButtonListeners();
+
+  return [removeButtons, main, fragment, addButtons];
+};
 
 /* TODO
 19. selectMenuChangeEventHandler
