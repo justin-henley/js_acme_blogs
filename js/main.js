@@ -394,7 +394,7 @@ Therefore, these functions will also need to be async. When they call the API fu
 need to await data from those functions.
 */
 
-/* TODO
+/* 
 14. displayComments
 a. Dependencies: getPostComments, createComments
 b. Is an async function
@@ -408,9 +408,21 @@ h. Creates a variable named fragment equal to createComments(comments)
 i. Append the fragment to the section
 j. Return the section element
 */
-const displayComments = async (postID) => {};
+const displayComments = async (postID) => {
+  if (!postID) return undefined;
 
-/* TODO
+  const section = document.createElement("section");
+  section.dataset.postId = postID;
+  section.classList.add("comments", "hide");
+
+  const comments = await getPostComments(postID);
+  const fragment = createComments(comments);
+
+  section.appendChild(fragment);
+  return section;
+};
+
+/* 
 15. createPosts
 a. Dependencies: createElemWithText, getUser, displayComments
 b. Is an async function
@@ -436,7 +448,46 @@ r. Append the section element to the article element
 s. After the loop completes, append the article element to the fragment
 t. Return the fragment element
 */
-const createPosts = () => {};
+const createPosts = async (postsJSON) => {
+  if (!postsJSON) return undefined;
+
+  const fragment = document.createDocumentFragment();
+
+  for (let post of postsJSON) {
+    const article = document.createElement("article");
+    const h2 = createElemWithText("h2", post.title);
+    const p_body = createElemWithText("p", post.body);
+    const p_postid = createElemWithText("p", `Post ID: ${post.id}`);
+
+    const author = await getUser(post.userId);
+    const p_author = createElemWithText(
+      "p",
+      `Author: ${author.name} with ${author.company.name}`
+    );
+    const p_catchphrase = createElemWithText(
+      "p",
+      `${author.company.catchPhrase}`
+    );
+
+    const button = createElemWithText("button", "Show Comments");
+    button.dataset.postId = post.id;
+
+    const section = await displayComments(post.id);
+    article.append(
+      h2,
+      p_body,
+      p_postid,
+      p_author,
+      p_catchphrase,
+      button,
+      section
+    );
+
+    fragment.appendChild(article);
+  }
+
+  return fragment;
+};
 
 /* TODO
 16. displayPosts
