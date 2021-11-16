@@ -58,7 +58,7 @@ const createSelectOptions = (data) => {
   return optionElements;
 };
 
-/* TODO
+/* 
 3. toggleCommentSection
 a. Receives a postId as the parameter
 b. Selects the section element with the data-post-id attribute equal to the postId
@@ -81,7 +81,8 @@ const toggleCommentSection = (postId) => {
   if (!section) return null;
 
   // Toggle the class
-  section.toggleAttribute("hide");
+  section.classList.toggle("hide");
+  return section;
 };
 
 /* 
@@ -373,11 +374,11 @@ e. Uses the fetch API to request all users
 f. Await the users data response
 g. Return the JSON data
 */
-const getPostComments = async (postID) => {
-  if (!postID) return undefined;
+const getPostComments = async (postId) => {
+  if (!postId) return undefined;
   try {
     const res = await fetch(
-      `https://jsonplaceholder.typicode.com/comments?postId=${postID}`
+      `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
     );
 
     if (!res.ok) throw new Error("Status code not in 200-299 range");
@@ -388,7 +389,7 @@ const getPostComments = async (postID) => {
   }
 };
 
-/* TODO
+/* 
 NOTE: The next functions will depend on the async API data functions we just created.
 Therefore, these functions will also need to be async. When they call the API functions, they will
 need to await data from those functions.
@@ -408,14 +409,14 @@ h. Creates a variable named fragment equal to createComments(comments)
 i. Append the fragment to the section
 j. Return the section element
 */
-const displayComments = async (postID) => {
-  if (!postID) return undefined;
+const displayComments = async (postId) => {
+  if (!postId) return undefined;
 
   const section = document.createElement("section");
-  section.dataset.postId = postID;
+  section.dataset.postId = postId;
   section.classList.add("comments", "hide");
 
-  const comments = await getPostComments(postID);
+  const comments = await getPostComments(postId);
   const fragment = createComments(comments);
 
   section.appendChild(fragment);
@@ -457,7 +458,7 @@ const createPosts = async (postsJSON) => {
     const article = document.createElement("article");
     const h2 = createElemWithText("h2", post.title);
     const p_body = createElemWithText("p", post.body);
-    const p_postid = createElemWithText("p", `Post ID: ${post.id}`);
+    const p_postId = createElemWithText("p", `Post ID: ${post.id}`);
 
     const author = await getUser(post.userId);
     const p_author = createElemWithText(
@@ -476,7 +477,7 @@ const createPosts = async (postsJSON) => {
     article.append(
       h2,
       p_body,
-      p_postid,
+      p_postId,
       p_author,
       p_catchphrase,
       button,
@@ -542,7 +543,15 @@ h. Return an array containing the section element returned from
 toggleCommentSection and the button element returned from
 toggleCommentButton: [section, button]
 */
-const toggleComments = () => {};
+const toggleComments = (event, postId) => {
+  if (!event || !postId) return undefined;
+
+  event.target.listener = true;
+  const section = toggleCommentSection(postId);
+  const button = toggleCommentButton(postId);
+
+  return [section, button];
+};
 
 /* TODO
 18. refreshPosts
