@@ -636,7 +636,11 @@ However, I can only test if the initApp function exists. It does not return anyt
 const initApp = () => {
   initPage();
   const select = document.getElementById("selectMenu");
-  select.addEventListener("change", selectMenuChangeEventHandler());
+  select.addEventListener(
+    "change",
+    (event) => selectMenuChangeEventHandler(event),
+    false
+  );
 };
 
 /* TODO
