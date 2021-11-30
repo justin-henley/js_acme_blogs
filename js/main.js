@@ -7,8 +7,6 @@ Date:       2021-11-30
 Description:    A complete definition of the functions specified in the assignment. Provides the JS that powers the blog site.
 */
 
-// TODO discussion for project
-
 /**
  * Receives up to 3 parameters and returns a newly-created HTML element
  *
